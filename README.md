@@ -1,14 +1,14 @@
-# example
+# egg个人项目
 
 
 
-## QuickStart
+## 快速开始
 
 <!-- add docs here for user -->
 
-see [egg docs][egg] for more detail.
+ [egg docs][egg] 官网地址
 
-### Development
+### 项目安装
 
 ```bash
 $ npm i
@@ -16,14 +16,14 @@ $ npm run dev
 $ open http://localhost:7001/
 ```
 
-### Deploy
+### 开始项目
 
 ```bash
 $ npm start
 $ npm stop
 ```
 
-### npm scripts
+### 项目测试
 
 - Use `npm run lint` to check code style.
 - Use `npm test` to run unit test.
