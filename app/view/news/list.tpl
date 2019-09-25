@@ -4,14 +4,19 @@
     <link rel="stylesheet" href="/public/css/news.css" />
   </head>
   <body>
-    <ul class="news-view view">
-      {% for item in list %}
-        <li class="item">
-          <p>{{ item.id }}</p>
-          <p>{{ item.name }}</p>
-          <p>{{ item.age }}</p>
-        </li>
-      {% endfor %}
-    </ul>
+  <table>
+    <tr>
+      <td>ID</td>
+      <td>名称</td>
+      <td>年龄</td>
+    </tr>
+    {% for item in list %}
+      <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.age}}</td>
+      </tr>
+    {% endfor %}
+  </table>
   </body>
 </html>

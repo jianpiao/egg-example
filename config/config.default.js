@@ -28,19 +28,21 @@ module.exports = appInfo => {
     defaultViewEngine: 'nunjucks',
     mapping: {
       '.tpl': 'nunjucks',
-    }
-  }
+    },
+  };
 
   config.news = {
     serverUrl: 'http://www.smallzip.com/test/public/index.php',
-  }
+  };
 
   // 配置需要的中间件，数组顺序即为中间件的加载顺序
-  config.middleware = ['gzip']
+  config.middleware = ['gzip'];
   // 配置 gzip 中间件的配置
   config.gzip = {
     threshold: 1024, // 小于 1k 的响应体不压缩
-  }
+  };
+
+  config.baseDir = 'D:/XAMPP/htdocs';
 
   config.mysql = {
     // 单数据库信息配置
@@ -60,6 +62,17 @@ module.exports = appInfo => {
     app: true,
     // 是否加载到 agent 上，默认关闭
     agent: false,
+  };
+
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+    domainWhiteList: ['*']
+  };
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
   };
 
   return {

@@ -1,3 +1,5 @@
+'use strict';
+
 const Controller = require('egg').Controller;
 
 class NewsController extends Controller {
@@ -10,34 +12,34 @@ class NewsController extends Controller {
   async check() {
     const { ctx } = this;
     const data = await ctx.service.news.check();
-    ctx.body = data
+    ctx.body = data;
   }
 
   async add() {
     const { ctx } = this;
-    const text = ctx.query.text || ''
+    const text = ctx.query.text || '';
     const data = await ctx.service.news.add(text);
-    ctx.body = data
+    ctx.body = data;
   }
 
   async modify() {
     const { ctx } = this;
-    const id = ctx.query.id || 2
-    const text = ctx.query.text || ''
+    const id = ctx.query.id || 2;
+    const text = ctx.query.text || '';
     const data = await ctx.service.news.modify(id, text);
-    if(data.failType==1){
-      ctx.body = 'id不存在'
-      ctx.status = 201
+    if (data.failType === 1) {
+      ctx.body = 'id不存在';
+      ctx.status = 201;
     } else {
-      ctx.body = data
+      ctx.body = data;
     }
   }
 
   async remove() {
     const { ctx } = this;
-    const id = ctx.query.id || 2
+    const id = ctx.query.id || 2;
     const data = await ctx.service.news.remove(id);
-    ctx.body = data
+    ctx.body = data;
   }
 }
 

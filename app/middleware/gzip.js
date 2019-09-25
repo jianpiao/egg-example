@@ -1,3 +1,5 @@
+
+'use strict';
 const isJSON = require('koa-is-json');
 const zlib = require('zlib');
 

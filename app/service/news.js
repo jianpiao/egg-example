@@ -1,3 +1,5 @@
+'use strict';
+
 const Service = require('egg').Service;
 
 class NewsService extends Service {
@@ -10,15 +12,15 @@ class NewsService extends Service {
       method: 'GET',
       dataType: 'json',
     });
-    if (list.data.code == 200) {
+    if (list.data.code === 200) {
       return list.data.data;
     } else {
-      return Promise.reject('错误')
+      return Promise.reject('错误');
     }
   }
 
   async check() {
-    const list = await this.app.mysql.select('home');
+    const list = await this.app.mysql.get('upload_files');
     return list;
   }
 
@@ -27,9 +29,9 @@ class NewsService extends Service {
       data: text,
       add_time: Date.now()
     }
-    const result = await this.app.mysql.insert('home', row);
+    const result = await this.app.mysql.insert('upload_files', row);
     if (result.affectedRows === 1) {
-      const data = await this.app.mysql.select('home');
+      const data = await this.app.mysql.get('upload_files');
       return data;
     } else {
       return Promise.reject('插入失败')
@@ -49,13 +51,13 @@ class NewsService extends Service {
     }
 
     return await this.app.mysql.beginTransactionScope(async conn => {
-      let data = await conn.select('home', {
+      let data = await conn.select('upload_files', {
         where: { id }
       })
       if (data.length > 0) {
-        const updateSuccess = await conn.update('home', row, options);
+        const updateSuccess = await conn.update('upload_files', row, options);
         if (updateSuccess.affectedRows === 1) {
-          data = await conn.select('home');
+          data = await conn.select('upload_files');
           return data;
         } else {
           return Promise.reject('更新失败')
@@ -69,9 +71,9 @@ class NewsService extends Service {
   async remove(id) {
     const { ctx } = this;
     return await this.app.mysql.beginTransactionScope(async conn => {
-      const updateSuccess = await conn.delete('home', { id });
+      const updateSuccess = await conn.delete('upload_files', { id });
       if (updateSuccess.affectedRows === 1) {
-        const data = await conn.select('home');
+        const data = await conn.select('upload_files');
         return data;
       } else {
         return Promise.reject('删除失败')
