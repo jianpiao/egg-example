@@ -25,10 +25,10 @@ class UploadController extends Controller {
     // const filename = stream.filename + md5(stream.filename) + path
     //   .extname(stream.filename)
     //   .toLocaleLowerCase();
-    const filename = path.dirname(stream.filename) + '-' + Date.now() + path.extname(stream.filename);
+    const filename = stream.filename + '_' + Date.now() + path.extname(stream.filename);
     // 文件生成绝对路径
-    // 当然这里这样市不行的，因为你还要判断一下是否存在文件路径
-    const target = path.join(this.config.baseDir, 'app/public/uploads', filename);
+    // 当然这里这样市不行的，因为你还要判断一下是否存在文件路径 D:\XAMPP\htdocs\app\public\uploads
+    const target = path.join(this.config.baseDir, '/app/public/uploads/', filename);
     // 生成一个文件写入 文件流
     const writeStream = fs.createWriteStream(target);
     try {
@@ -41,7 +41,8 @@ class UploadController extends Controller {
     }
     // 文件响应
     ctx.body = {
-      url: this.config.baseDir + 'app/public/uploads/' + filename,
+      file_name: stream.filename,
+      url: this.config.baseDir + '/app/public/uploads/' + filename,
     };
   }
 }

@@ -18,7 +18,7 @@ class HomeController extends Controller {
       { title: '爱的发声4', data: filterTime(Date.now()) },
       { title: '爱的发声5', data: filterTime(Date.now()) },
       { title: '爱的发声6', data: filterTime(Date.now()) },
-    ]
+    ];
   }
 }
 

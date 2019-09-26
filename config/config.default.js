@@ -36,12 +36,13 @@ module.exports = appInfo => {
   };
 
   // 配置需要的中间件，数组顺序即为中间件的加载顺序
-  config.middleware = ['gzip'];
+  config.middleware = [ 'gzip' ];
   // 配置 gzip 中间件的配置
   config.gzip = {
     threshold: 1024, // 小于 1k 的响应体不压缩
   };
 
+  // config.baseDir = 'http://www.smallzip.com/';
   config.baseDir = 'D:/XAMPP/htdocs';
 
   config.mysql = {
@@ -68,11 +69,11 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: ['*']
+    domainWhiteList: [ '*' ]
   };
   config.cors = {
     origin: '*',
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   };
 
   return {

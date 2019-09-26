@@ -21,4 +21,6 @@ module.exports = app => {
 
   /** 文件上传 **/
   router.post('/upload', controller.upload.index);
+  router.get('/files', controller.files.index);
+  router.post('/addFiles', controller.files.addFiles);
 };
