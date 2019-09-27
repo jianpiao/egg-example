@@ -13,7 +13,7 @@ function filterTime(date, spare = '-', timeSpare = ':') {
   }
   // 生成时间
   function time(t, spare = '-', timeSpare = ':') {
-    let [y, m, d, h, mi, ms] = [
+    const [ y, m, d, h, mi, ms ] = [
       new Date(t).getFullYear(),
       new Date(t).getMonth() + 1,
       new Date(t).getDate(),
@@ -26,7 +26,7 @@ function filterTime(date, spare = '-', timeSpare = ':') {
   // 获取长度
   let len = null;
   if (typeof date === 'number') {
-    date = parseInt(date)
+    date = parseInt(date);
     len = date.toString().length;
   } else {
     len = date.length;
@@ -36,9 +36,9 @@ function filterTime(date, spare = '-', timeSpare = ':') {
     return time(date * 1000, spare, timeSpare);
   } else if (len === 13) {
     return time(date, spare, timeSpare);
-  } else {
-    return time(date, spare, timeSpare);
   }
+  return time(date, spare, timeSpare);
+
 }
 
 

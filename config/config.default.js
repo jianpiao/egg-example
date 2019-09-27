@@ -36,7 +36,7 @@ module.exports = appInfo => {
   };
 
   // 配置需要的中间件，数组顺序即为中间件的加载顺序
-  config.middleware = ['gzip'];
+  config.middleware = [ 'gzip' ];
   // 配置 gzip 中间件的配置
   config.gzip = {
     threshold: 1024, // 小于 1k 的响应体不压缩
@@ -69,7 +69,7 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: ['*']
+    domainWhiteList: [ '*' ],
   };
 
   // 支持跨域
@@ -82,7 +82,7 @@ module.exports = appInfo => {
   config.multipart = {
     fileSize: '10mb',
     mode: 'stream',
-    fileExtensions: ['.xls', '.xlsx', '.txt', '.jpg', '.jpeg', '.png', '.gif', '.bmp', '.pdf', '.JPG', '.JPEG', '.PBG', '.GIF', '.BMP', '.PDF', '.zip', '.docx', '.rar', '.html', '.htm', '.vsd'], // 扩展几种上传的文件格式
+    fileExtensions: [ '.xls', '.xlsx', '.txt', '.jpg', '.jpeg', '.png', '.gif', '.bmp', '.pdf', '.JPG', '.JPEG', '.PBG', '.GIF', '.BMP', '.PDF', '.zip', '.docx', '.rar', '.html', '.htm', '.vsd' ], // 扩展几种上传的文件格式
   };
 
   return {

@@ -13,7 +13,7 @@ function filterTime(date, spare = '-') {
   }
   // 生成时间
   function time(t, spare = '-') {
-    let [y, m, d] = [
+    const [ y, m, d ] = [
       new Date(t).getFullYear(),
       new Date(t).getMonth() + 1,
       new Date(t).getDate(),
@@ -33,9 +33,9 @@ function filterTime(date, spare = '-') {
     return time(date * 1000, spare);
   } else if (len === 13) {
     return time(date, spare);
-  } else {
-    return time(date, spare);
   }
+  return time(date, spare);
+
 }
 
 

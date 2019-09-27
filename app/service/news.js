@@ -14,72 +14,71 @@ class NewsService extends Service {
     });
     if (list.data.code === 200) {
       return list.data.data;
-    } else {
-      return Promise.reject('错误');
     }
+    // return Promise.reject('错误');
   }
 
-  async check() {
-    const list = await this.app.mysql.get('upload_files');
-    return list;
-  }
+  // async check() {
+  //   const list = await this.app.mysql.get('upload_files');
+  //   return list;
+  // }
 
-  async add(text) {
-    const row = {
-      data: text,
-      add_time: Date.now()
-    }
-    const result = await this.app.mysql.insert('upload_files', row);
-    if (result.affectedRows === 1) {
-      const data = await this.app.mysql.get('upload_files');
-      return data;
-    } else {
-      return Promise.reject('插入失败')
-    }
-  }
+  // async add(text) {
+  //   const row = {
+  //     data: text,
+  //     add_time: Date.now(),
+  //   };
+  //   const result = await this.app.mysql.insert('upload_files', row);
+  //   if (result.affectedRows === 1) {
+  //     const data = await this.app.mysql.get('upload_files');
+  //     return data;
+  //   }
+  //   return Promise.reject('插入失败');
 
-  async modify(id, text) {
-    const { ctx } = this;
-    const row = {
-      data: text,
-      add_time: parseInt(Date.now() / 1000)
-    }
-    const options = {
-      where: {
-        id: id
-      }
-    }
+  // }
 
-    return await this.app.mysql.beginTransactionScope(async conn => {
-      let data = await conn.select('upload_files', {
-        where: { id }
-      })
-      if (data.length > 0) {
-        const updateSuccess = await conn.update('upload_files', row, options);
-        if (updateSuccess.affectedRows === 1) {
-          data = await conn.select('upload_files');
-          return data;
-        } else {
-          return Promise.reject('更新失败')
-        }
-      } else {
-        return { failType: 1 }
-      }
-    }, ctx);
-  }
+  // async modify(id, text) {
+  //   const { ctx } = this;
+  //   const row = {
+  //     data: text,
+  //     add_time: parseInt(Date.now() / 1000),
+  //   };
+  //   const options = {
+  //     where: {
+  //       id,
+  //     },
+  //   };
 
-  async remove(id) {
-    const { ctx } = this;
-    return await this.app.mysql.beginTransactionScope(async conn => {
-      const updateSuccess = await conn.delete('upload_files', { id });
-      if (updateSuccess.affectedRows === 1) {
-        const data = await conn.select('upload_files');
-        return data;
-      } else {
-        return Promise.reject('删除失败')
-      }
-    }, ctx);
-  }
+  //   return await this.app.mysql.beginTransactionScope(async conn => {
+  //     let data = await conn.select('upload_files', {
+  //       where: { id },
+  //     });
+  //     if (data.length > 0) {
+  //       const updateSuccess = await conn.update('upload_files', row, options);
+  //       if (updateSuccess.affectedRows === 1) {
+  //         data = await conn.select('upload_files');
+  //         return data;
+  //       }
+  //       return Promise.reject('更新失败');
+
+  //     }
+  //     return { failType: 1 };
+
+  //   }, ctx);
+  // }
+
+  // async remove(id) {
+  //   const { ctx } = this;
+  //   return await this.app.mysql.beginTransactionScope(async conn => {
+  //     const updateSuccess = await conn.delete('upload_files', { id });
+  //     if (updateSuccess.affectedRows === 1) {
+  //       const data = await conn.select('upload_files');
+  //       return data;
+  //     }
+  //     return Promise.reject('删除失败');
+
+  //   }, ctx);
+  // }
 }
 
 module.exports = NewsService;
