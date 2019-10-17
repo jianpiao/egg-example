@@ -13,6 +13,7 @@ const sendToWormhole = require('stream-wormhole');
 // 还有我们这里使用了egg-multipart
 // const md5 = require('md5');
 const filterDay = require('../extend/filterDay');
+const filterTime = require('../extend/filterTime');
 
 class UploadController extends Controller {
 
@@ -22,23 +23,27 @@ class UploadController extends Controller {
     const stream = await ctx.getFileStream();
 
     // 生成文件夹
-    const dirname = filterDay(Date.now(), '/');
+    const dirname = filterDay(Date.now(),'/');
     function mkdirsSync(dirname) {
       if (fs.existsSync(dirname)) {
         return true;
+      } else {
+        if (mkdirsSync(path.dirname(dirname))) {
+          fs.mkdirSync(dirname);
+          return true;
+        }
       }
-      if (mkdirsSync(path.dirname(dirname))) {
-        fs.mkdirSync(dirname);
-        return true;
-      }
-
     }
     mkdirsSync(path.join(this.config.baseDir, dirname));
 
     // 新建一个文件名
-    const filename = stream.filename + '_' + Date.now() + path.extname(stream.filename);
+    // const filename = stream.filename + md5(stream.filename) + path
+    //   .extname(stream.filename)
+    //   .toLocaleLowerCase();
+    const filename = stream.filename + '_' + filterTime(Date.now(),'','') + path.extname(stream.filename);
     // 目标文件路径
-    const target = path.join(this.config.baseDir, dirname, filename);
+    // const target = path.join(this.config.baseDir, filename);
+    const target = path.join(this.config.baseDir, dirname,filename);
     // 生成一个文件写入 文件流
     const writeStream = fs.createWriteStream(target);
     try {
@@ -51,8 +56,8 @@ class UploadController extends Controller {
     }
     // 文件响应
     ctx.body = {
-      name: stream.filename,
-      url: path.join(this.config.baseDir, dirname, filename),
+      name:stream.filename,
+      url: 'http://www.smallzip.com/upload_file/public/'+path.join(dirname, filename),
       uplaod_path: dirname,
       file_name: filename,
     };

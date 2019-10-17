@@ -4,6 +4,8 @@ const Service = require('egg').Service;
 const filterTime = require('../extend/filterTime');
 // node.js 文件操作对象
 const fs = require('fs');
+// node.js 路径操作对象
+const path = require('path');
 
 class FilesService extends Service {
   // 获取列表
@@ -28,7 +30,7 @@ class FilesService extends Service {
           add_time: filterTime(Date.now()),
         });
       }
-      return { success: true };
+      return true;
     }, ctx);
     return result;
   }
@@ -38,12 +40,23 @@ class FilesService extends Service {
     const { ctx, app } = this;
     const result = await app.mysql.beginTransactionScope(async conn => {
       // 删除本地文件
-      fs.unlinkSync(this.config.baseDir + uplaod_path + '/' + file_name);
+      fs.unlinkSync(this.config.baseDir + '/' + uplaod_path + '/' + file_name);
       await conn.update('upload_files', {
         id,
-        status: 2,
-      });
-      return { success: true };
+        status: 2
+      })
+      return true;
+    }, ctx);
+    return result;
+  }
+
+  // 移除文件
+  async removeFiles(uplaod_path, file_name) {
+    const { ctx, app } = this;
+    const result = await app.mysql.beginTransactionScope(async conn => {
+      // 删除本地文件
+      const state = await fs.unlinkSync(this.config.baseDir + '/' + uplaod_path + '/' + file_name);
+      return state;
     }, ctx);
     return result;
   }

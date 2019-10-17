@@ -32,7 +32,7 @@ module.exports = appInfo => {
   };
 
   config.news = {
-    serverUrl: 'http://www.smallzip.com/test/public/index.php',
+    serverUrl: 'http://smallzip.com/test/public/index.php',
   };
 
   // 配置需要的中间件，数组顺序即为中间件的加载顺序
@@ -42,8 +42,8 @@ module.exports = appInfo => {
     threshold: 1024, // 小于 1k 的响应体不压缩
   };
 
-  // config.baseDir = 'http://www.smallzip.com/';  // 上线后要配置自己的服务器域名访问地址
-  config.baseDir = 'D:/XAMPP/htdocs/upload_file/public/';
+  // config.baseDir = 'http://www.smallzip.com/';
+  config.baseDir = 'C:/xampp/htdocs/upload_file/public';
 
   config.mysql = {
     // 单数据库信息配置
@@ -69,21 +69,19 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
-    domainWhiteList: [ '*' ],
+    domainWhiteList: [ '*' ]
   };
-
-  // 支持跨域
   config.cors = {
     origin: '*',
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
   };
 
-  // 配置上传 支持文件类型
-  config.multipart = {
-    fileSize: '10mb',
-    mode: 'stream',
-    fileExtensions: [ '.xls', '.xlsx', '.txt', '.jpg', '.jpeg', '.png', '.gif', '.bmp', '.pdf', '.JPG', '.JPEG', '.PBG', '.GIF', '.BMP', '.PDF', '.zip', '.docx', '.rar', '.html', '.htm', '.vsd' ], // 扩展几种上传的文件格式
-  };
+  	// 配置上传
+	config.multipart = {
+	  fileSize: '10mb',
+	  mode: 'stream',
+	  fileExtensions: ['.xls','.xlsx', '.txt','.jpg','.jpeg','.png','.gif','.bmp','.pdf','.JPG','.JPEG','.PBG','.GIF','.BMP','.PDF','.zip','.docx','.rar','.html','.htm','.vsd'], // 扩展几种上传的文件格式
+	};
 
   return {
     ...config,

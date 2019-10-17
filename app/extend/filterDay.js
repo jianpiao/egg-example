@@ -5,7 +5,7 @@
 // 参数1：date  [转换的日期]
 // 参数2:  spare  [年月日数间隔符]
 // 参数3：timeSpare [时分秒间隔符]
-function filterTime(date, spare = '-') {
+function filterDay(date, spare = '-') {
   // 补零
   function fix(i) {
     typeof i !== 'number' ? i = parseInt(i) : null;
@@ -13,7 +13,7 @@ function filterTime(date, spare = '-') {
   }
   // 生成时间
   function time(t, spare = '-') {
-    const [ y, m, d ] = [
+    let [y, m, d] = [
       new Date(t).getFullYear(),
       new Date(t).getMonth() + 1,
       new Date(t).getDate(),
@@ -33,10 +33,10 @@ function filterTime(date, spare = '-') {
     return time(date * 1000, spare);
   } else if (len === 13) {
     return time(date, spare);
+  } else {
+    return time(date, spare);
   }
-  return time(date, spare);
-
 }
 
 
-module.exports = filterTime;
+module.exports = filterDay;

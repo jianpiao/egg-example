@@ -6,7 +6,7 @@ const filterTime = require('../extend/filterTime');
 class HomeController extends Controller {
   async index() {
     const { ctx } = this;
-    ctx.body = 'hi, egg';
+    ctx.body = '我是EGG';
   }
 
   async getDate() {
