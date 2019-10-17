@@ -8,8 +8,10 @@
 <!-- add docs here for user -->
 
  [egg docs][egg] 官网地址
+ 
+## 项目下载到本地
 
-### 项目安装
+### 项目安装(打开控制台)
 
 ```bash
 $ npm i
